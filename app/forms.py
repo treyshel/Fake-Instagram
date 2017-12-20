@@ -1,8 +1,8 @@
 from django import forms
-from uploads.core.models import Document
+from app.models import GetImage
 
 
-class DocumentForm(forms.ModelForm):
+class ImageForm(forms.ModelForm):
     class Meta:
-        model = Document
-        fields = ('description', 'document', )
+        model = GetImage
+        fields = ('caption', 'image')

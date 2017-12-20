@@ -1,9 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
+from app.forms import ImageForm
+from app.models import GetImage
+from django.views import View
 
-from django.db import models
+
+class PhotoView(View):
+    def get(self, request):
+        form = ImageForm()
+        return render(request, 'app/post.html', {'form': form})
+
+    def post(self, request):
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('app:feed')
+        else:
+            return render(request, 'app/post.html', {'form': form})
 
 
-class Document(models.Model):
-    caption = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='documents/')
-    time_uploaded = models.DateTimeField(auto_now_add=True)
+class ShowFeed(View):
+    def get(self, request):
+        objects = GetImage.objects.all()
+        return render(request, 'app/base.html', {'objects': objects})

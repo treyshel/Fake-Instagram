@@ -1,0 +1,29 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 65%;
+    background-color: slategray;
+    color: white;
+    text-align: center;
+}
+
+i {
+    color: white;
+}
+
+.center-content {
+    text-align: center;
+}
+
+hr {
+    background-color: dimgrey;
+    color: dimgrey;
+    border: solid 2px dimgrey;
+    height: 5px;
+    border-radius: 50px;
+}
+/* 
+h1 {
+    font-family: 'Lobster', cursive;
+} */
