@@ -23,16 +23,26 @@
 </head>
 
 <body>
-    <h1 class="center-content">FinstaGram</h1>
-    <hr class="col-lg-6 col-lg-offset-3"> {% block body %} {% if objects %} {% for obj in objects %}
-    <div class="col-lg-8 col-lg-offset-2 center-content">
-        <img src="{% static obj.image_url %}" width="340" height="280" />
-    </div>{% endfor %} {% endif %} {% endblock body %}
-    <div class="footer col-lg-offset-2">
-        <a href="{% url 'app:upload' %}">
-            <i class=" fa fa-camera-retro fa-5x "></i>
+    <div class="center-content">
+        <h1 class="header col-lg-offset-5">FinstaGram</h1>
+        <hr class="col-lg-6 col-lg-offset-3"> {% block body %} {% if objects %} {% for obj in objects %}
+        <div class="col-lg-6 col-lg-offset-3 center-content">
+            <div class="row">
+                <div class="thumbnail">
+                    <p>{{ obj.uploaded_by }} {{ obj.uploaded_at }}</p>
+                    <img src="{% static obj.image_url %}" />
+                    <div class="caption">
+                        <p>{{ obj.caption }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>{% endfor %} {% endif %} {% endblock body %}
+        <div class="footer col-lg-6 col-lg-offset-3">
+            <a href="{% url 'app:upload' %}">
+                <i class=" fa fa-camera-retro fa-5x "></i>
 
-        </a>
+            </a>
+        </div>
     </div>
 </body>
 
