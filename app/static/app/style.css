@@ -6,34 +6,76 @@
     background-color: slategray;
     color: white;
     text-align: center;
+    color: lightgreen;
 }
 
-i {
-    color: white;
-}
-
-.center-content {
-    text-align: center;
+.navbar-default {
+    background: lightblue; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(
+        left,
+        lightgreen
+    ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(
+        right,
+        lightgreen
+    ); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(
+        right,
+        lightgreen
+    ); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(
+        to right,
+        lightblue,
+        lightgreen
+    ); /* Standard syntax */
+    border-radius: 25px;
 }
 
 hr {
     background-color: dimgrey;
     color: dimgrey;
-    border: solid 2px dimgrey;
-    height: 5px;
+    border-color: dimgrey;
+    height: 8px;
     border-radius: 50px;
+}
+
+.inline {
+    display: inline;
 }
 
 .header {
     font-family: 'Lobster', cursive;
-    font-size: 4em;
-    position: fixed;
-    left: 0;
-    top: 0;
+    position: absolute;
     text-align: center;
+    font-size: 8em;
 }
 
 img {
     min-width: 100%;
     min-height: 100%;
+}
+
+.username {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.fa-heart {
+    float: right;
+}
+
+.fa-5x {
+    color: white;
+}
+
+#delete-picture {
+    float: right;
+    background-color: lightblue;
+    border-color: lightblue;
+    border-radius: 5px;
+}
+
+.margins {
+    margin-top: 10em;
+    margin-bottom: 5em;
 }
