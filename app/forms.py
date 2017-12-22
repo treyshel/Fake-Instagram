@@ -21,7 +21,7 @@ class Filters(forms.Form):
 
     def filter(self):
         return {
-            'BLUE': ImageFilter.BLUR,
+            'BLUR': ImageFilter.BLUR,
             'CONTOUR': ImageFilter.CONTOUR,
             'DETAIL': ImageFilter.DETAIL,
             'EDGE_ENHANCE': ImageFilter.EDGE_ENHANCE,

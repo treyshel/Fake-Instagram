@@ -24,12 +24,12 @@
 
 <body>
     <div class="header">
-        <div class="col-lg-10 col-lg-offset-1 navbar-default navbar-fixed-top">
+        <div class="col-lg-6 col-lg-offset-3 navbar-default navbar-fixed-top">
             <h1>FinstaGram</h1>
             <hr> 
         </div>
     </div>
-    <div class="col-lg-8 col-lg-offset-2 margins">
+    <div class="col-lg-4 col-lg-offset-4 margins">
         <div class="row">
             {% block body %} 
             {% if objects %} 
@@ -41,26 +41,33 @@
                         <button id="delete-picture">
                             <i class="fa fa-times fa-2x" aria-hidden="true"></i>
                         </button>
+                        <p id="time-posted">{{ obj.uploaded_at }}</p>
                     </form>                
-                    <p class="username">{{ obj.uploaded_by }}</p>
+                    <p class="username">Posted By: {{ obj.uploaded_by }}</p>
                 </div>
-                <img src="{% static obj.image_url %}" />
+                <img src="{% static obj.image_url %}?t={% now 'u' %}" />
                 <p>{{ obj.caption }}</p>
-                <!-- {{ obj.uploaded_at }} -->
+                <a href="{% url 'app:filter' obj.id %}">Filter</a>
             </div>
             {% endfor %} 
+            {% else %}
+                <h1>
+                    NO PICTURES HAVE BEEN POSTED! <i class="fa fa-frown-o" aria-hidden="true"></i>
+                </h1>
             {% endif %} 
             {% endblock body %}
         </div>
     </div>
-    <div class="footer col-lg-8 col-lg-offset-2">
+    <div class="footer col-lg-6 col-lg-offset-3">
+        <a href="{% url 'app:upload' %}" title="all users">
+            <i class="fa fa-user fa-4x" aria-hidden="true"></i>
+        </a>            
         <a href="{% url 'app:upload' %}" title="upload a photo">
-            <i class="fa fa-camera-retro fa-5x"></i>
+            <i class="fa fa-camera-retro fa-4x"></i>
         </a>
-        <a href="{% url 'app:upload' %}" title="upload a photo">
-            <i class="fa fa-heart fa-5x" aria-hidden="true"></i>
+        <a href="{% url 'app:upload' %}" title="likes">
+            <i class="fa fa-heart fa-4x" aria-hidden="true"></i>
         </a>
-    </div>
     </div>
 </body>
 

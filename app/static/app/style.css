@@ -7,6 +7,7 @@
     color: white;
     text-align: center;
     color: lightgreen;
+    border-radius: 8px;
 }
 
 .navbar-default {
@@ -50,9 +51,8 @@ hr {
     font-size: 8em;
 }
 
-img {
-    min-width: 100%;
-    min-height: 100%;
+#time-posted {
+    color: lightgrey;
 }
 
 .username {
@@ -64,8 +64,14 @@ img {
     float: right;
 }
 
-.fa-5x {
+.fa-user {
+    float: left;
+}
+
+.fa-4x {
     color: white;
+    padding-bottom: 8px;
+    padding-top: 8px;
 }
 
 #delete-picture {
@@ -78,4 +84,8 @@ img {
 .margins {
     margin-top: 10em;
     margin-bottom: 5em;
+}
+
+h4 {
+    font-weight: bold;
 }
