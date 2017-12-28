@@ -9,3 +9,9 @@ class GetImage(models.Model):
 
     def image_url(self):
         return self.image.url[len('app/static/'):]
+
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=120)
+    time = models.DateTimeField(auto_now_add=True)
+    document = models.ForeignKey(GetImage, on_delete=models.CASCADE)

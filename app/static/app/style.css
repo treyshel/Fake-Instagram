@@ -6,7 +6,6 @@
     background-color: slategray;
     color: white;
     text-align: center;
-    color: lightgreen;
     border-radius: 8px;
 }
 
@@ -88,4 +87,12 @@ hr {
 
 h4 {
     font-weight: bold;
+}
+
+.thumbnail {
+    border: 4px solid lightblue;
+}
+
+#filter-link {
+    color: lightblue;
 }
