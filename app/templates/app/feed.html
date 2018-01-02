@@ -1,36 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
+{% extends 'app/base.html' %}
 {% load static %}
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
-    <!-- google font import -->
-    <link href="https://fonts.googleapis.com/css?family=Cinzel|Comfortaa|Lobster" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'app/style.css' %}">
-</head>
-
-<body>
+{% block content %}
     <div class="container">
         <div class="header">
-            <div class="col-lg-6 col-lg-offset-3 navbar-default navbar-fixed-top">
+            <div class=" col-lg-10 col-sm-6 col-lg-offset-1 col-lg-offset-3 navbar-default navbar-fixed-top">
                 <h1>FinstaGram</h1>
                 <hr> 
             </div>
         </div>
-        <div class="col-lg-4 col-lg-offset-4 margins">
+        <div class="col-lg-4 col-md-6 col-sm-8 col-lg-offset-0 col-sm-offset-2 margins">
             <div class="row">
                 {% block body %} 
                 {% if objects %} 
@@ -59,7 +37,7 @@
                 {% endblock body %}
             </div>
         </div>
-        <div class="footer col-lg-6 col-lg-offset-3">
+        <div class="footer col-lg-10 col-sm-8 col-lg-offset-1 col-sm-offset-3">
             <a href="{% url 'app:upload' %}" title="all users">
                 <i class="fa fa-user fa-4x" aria-hidden="true"></i>
             </a>            
@@ -71,6 +49,4 @@
             </a>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}

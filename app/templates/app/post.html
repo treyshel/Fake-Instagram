@@ -1,27 +1,16 @@
-{% load static %} {% block body %}
+{% extends 'app/base.html' %}
+{% load static %} 
+{% block content %}
+<div class="col-lg-offset-5">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} 
+        <!-- put the form in a <p> tag -->
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    <p>
+        <a href="{% url 'app:feed' %}">Return to home</a>
+    </p>
+</div>
 
-<head>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'app/style.css' %}">
-</head>
-
-<body>
-    <div class="col-lg-offset-5">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %} 
-            <!-- put the form in a <p> tag -->
-            {{ form.as_p }}
-            <button type="submit">Upload</button>
-        </form>
-        <p>
-            <a href="{% url 'app:feed' %}">Return to home</a>
-        </p>
-    </div>
-</body>
-
-{% endblock body %}
+{% endblock %}
