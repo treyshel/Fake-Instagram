@@ -26,6 +26,20 @@
                     </div>
                     <img src="{% static obj.image_url %}?t={% now 'u' %}" />
                     <p>{{ obj.caption }}</p>
+                    {% if obj.comment_set.all %}
+                    <ul>
+                        {% for comment in obj.comment_set.all %}
+                        <li>
+                            {{ comment.comment }} - time: {{ comment.time }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <form action="{% url 'app:comment' obj.id %}" method="post">
+                        {% csrf_token %}
+                        {{ comment_form }}
+                        <button type="submit">Comment</button>                        
+                    </form>
                     <a id="filter-link" href="{% url 'app:filter' obj.id %}">Filter</a>
                 </div>
                 {% endfor %} 

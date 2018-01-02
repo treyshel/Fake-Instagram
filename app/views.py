@@ -23,7 +23,6 @@ class PhotoView(View):
                 (w + s) / 2), int((h + s) / 2)))
             image = resizeimage.resize_cover(image, [500, 500], validate=False)
             image.save(path)
-
             return redirect('app:feed')
         else:
             return render(request, 'app/post.html', {'form': form})
@@ -32,7 +31,9 @@ class PhotoView(View):
 class ShowFeed(View):
     def get(self, request):
         objects = GetImage.objects.all().order_by('-uploaded_at')
-        return render(request, 'app/feed.html', {'objects': objects})
+        return render(request, 'app/feed.html',
+                      {'objects': objects,
+                       'comment_form': CommentForm()})
 
 
 class AddFilter(View):
@@ -55,3 +56,14 @@ class DeletePost(View):
     def post(self, request, image_id):
         GetImage.objects.get(id=image_id).delete()
         return redirect('app:feed')
+
+
+class AddComment(View):
+    def post(self, request, image_id):
+        document = GetImage.objects.get(id=image_id)
+        form = CommentForm(document, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app:feed')
+        else:
+            return redirect('app:feed')

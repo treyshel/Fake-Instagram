@@ -47,8 +47,7 @@ def set_colors(colors):
     colors[hi] = (255, 255, 255)
     return colors, white, black
 
-
-def main():
+def warhol_filter():
     image = Image.open('../app/static/app/images/santaclaus.jpeg').convert(
         'RGB')
 
@@ -96,5 +95,9 @@ def main():
     image.show()
 
 
+def main():
+    warhol_filter()
+
+    
 if __name__ == '__main__':
     main()
