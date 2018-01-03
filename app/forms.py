@@ -44,3 +44,10 @@ class CommentForm(forms.Form):
     def save(self):
         return self.document.comment_set.create(
             comment=self.cleaned_data['comment'])
+
+
+class LikeForm(forms.Form):
+    like = forms.IntegerField()
+
+    def like_image(self):
+        return self.cleaned_data['like'] + 1

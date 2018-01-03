@@ -26,6 +26,13 @@
                     </div>
                     <img src="{% static obj.image_url %}?t={% now 'u' %}" />
                     <p>{{ obj.caption }}</p>
+                    <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button type="submit">
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        </button>
+                        {{obj.likes}}
+                    </form>
                     {% if obj.comment_set.all %}
                     <ul>
                         {% for comment in obj.comment_set.all %}

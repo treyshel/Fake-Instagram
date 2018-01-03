@@ -67,3 +67,11 @@ class AddComment(View):
             return redirect('app:feed')
         else:
             return redirect('app:feed')
+
+
+class Like(View):
+    def post(self, request, image_id):
+        add_like = GetImage.objects.get(id=image_id)
+        add_like.likes += 1
+        add_like.save()
+        return redirect('app:feed')
