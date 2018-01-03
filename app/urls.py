@@ -10,5 +10,5 @@ urlpatterns = [
     path('delete/<image_id>', views.DeletePost.as_view(), name='delete'),
     path('comment/<image_id>', views.AddComment.as_view(), name='comment'),
     path('likes/<image_id>', views.Like.as_view(), name='likes'),
-    # path('mostpopular/', views.MostPopular.as_view(), name='mostpopular')
+    path('mostpopular/', views.MostPopular.as_view(), name='mostpopular')
 ]

@@ -75,3 +75,9 @@ class Like(View):
         add_like.likes += 1
         add_like.save()
         return redirect('app:feed')
+
+class MostPopular(View):
+    def get(self, request):
+        objects = GetImage.objects.all().order_by('-likes')
+        return render(request, 'app/most-likes.html',
+                      {'objects': objects})

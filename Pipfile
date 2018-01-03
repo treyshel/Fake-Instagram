@@ -1,18 +1,26 @@
 [[source]]
+
 name = "pypi"
 url = "https://pypi.python.org/simple"
 verify_ssl = true
+
 
 [packages]
 
 django = "*"
 pytest = "*"
-"pytest-django" = "*"
-"pytest-cov" = "*"
+pytest-django = "*"
+pytest-cov = "*"
 coverage = "*"
+pipenv = "*"
+pillow = "*"
+python-resize-image = "*"
 
 
 [requires]
-python_version = "3.5"
+
+python_version = "3.6"
+
 
 [dev-packages]
+
