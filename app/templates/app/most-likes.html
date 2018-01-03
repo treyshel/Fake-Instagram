@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% load static %} 
+{% block content %}
+<div>
+    <form action="{% url 'app:mostpopular' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    </form>
+        <p>
+            <a href="{% url 'app:feed' %}">Return to home</a>
+        </p>
+</div>
+{% endblock %}
