@@ -1,12 +1,5 @@
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    /* width: 65%; */
+body {
     background-color: slategray;
-    color: white;
-    text-align: center;
-    border-radius: 8px;
 }
 
 .navbar-default {
@@ -47,7 +40,6 @@ hr {
     font-family: 'Lobster', cursive;
     position: absolute;
     text-align: center;
-    font-size: 8em;
 }
 
 #time-posted {
@@ -59,18 +51,11 @@ hr {
     font-weight: bold;
 }
 
-.fa-heart {
-    float: right;
-}
-
-.fa-user {
-    float: left;
-}
-
 .fa-4x {
     color: white;
+    margin-left: 5px;
+    margin-right: 5px;
     padding-bottom: 8px;
-    padding-top: 8px;
 }
 
 #delete-picture {
@@ -81,8 +66,8 @@ hr {
 }
 
 .margins {
-    margin-top: 10em;
-    margin-bottom: 6em;
+    margin-top: 15em;
+    margin-bottom: 1em;
     /* text-align: center; */
 }
 
@@ -92,6 +77,9 @@ h4 {
 
 .thumbnail {
     border: 4px solid lightblue;
+    width: 30em;
+    margin-left: 38px;
+    margin-right: 10px;
 }
 
 #filter-link {

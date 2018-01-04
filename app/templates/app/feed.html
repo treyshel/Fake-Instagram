@@ -1,73 +1,71 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container">
-        <div class="header">
-            <div class=" col-lg-10 col-sm-6 col-lg-offset-1 col-lg-offset-3 navbar-default navbar-fixed-top">
-                <h1>FinstaGram</h1>
-                <hr> 
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-8 col-lg-offset-0 col-sm-offset-2 margins">
-            <div class="row">
-                {% block body %} 
-                {% if objects %} 
-                {% for obj in objects %}
-                <div class="thumbnail">
-                    <div class="inline">
-                        <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <button id="delete-picture">
-                                <i class="fa fa-times fa-2x" aria-hidden="true"></i>
-                            </button>
-                            <p id="time-posted">{{ obj.uploaded_at }}</p>
-                        </form>                
-                        <p class="username">Posted By: {{ obj.uploaded_by }}</p>
-                    </div>
-                    <img src="{% static obj.image_url %}?t={% now 'u' %}" />
-                    <p>{{ obj.caption }}</p>
-                    <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <button type="submit">
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </button>
-                        {{obj.likes}}
-                    </form>
-                    {% if obj.comment_set.all %}
-                    <ul>
-                        {% for comment in obj.comment_set.all %}
-                        <li>
-                            {{ comment.comment }} - time: {{ comment.time }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <form action="{% url 'app:comment' obj.id %}" method="post">
-                        {% csrf_token %}
-                        {{ comment_form }}
-                        <button type="submit">Comment</button>                        
-                    </form>
-                    <a id="filter-link" href="{% url 'app:filter' obj.id %}">Filter</a>
-                </div>
-                {% endfor %} 
-                {% else %}
-                    <h1>
-                        NO PICTURES HAVE BEEN POSTED! <i class="fa fa-frown-o" aria-hidden="true"></i>
-                    </h1>
-                {% endif %} 
-                {% endblock body %}
-            </div>
-        </div>
-        <div class="footer col-lg-10 col-sm-8 col-lg-offset-1 col-sm-offset-3">
+<div class="container">
+    <div class="header">
+        <div class=" col-lg-10 col-sm-6 col-lg-offset-1 col-lg-offset-3 navbar-default navbar-fixed-top">
+            <h1>FinstaGram</h1>
+            <hr> 
             <a href="{% url 'app:upload' %}" title="all users">
                 <i class="fa fa-user fa-4x" aria-hidden="true"></i>
             </a>            
             <a href="{% url 'app:upload' %}" title="upload a photo">
                 <i class="fa fa-camera-retro fa-4x"></i>
             </a>
-            <a href="most-likes.html" title="likes">
+            <a href="{% url 'app:mostpopular' %}" title="likes">
                 <i class="fa fa-heart fa-4x" aria-hidden="true"></i>
             </a>
         </div>
     </div>
+    <div class="col-lg-offset-1 col-sm-offset-2 margins">
+        <div class="row">
+            {% block body %} 
+            {% if objects %} 
+            {% for obj in objects %}
+            <div class="col-lg-4 col-sm-8 thumbnail">
+                <div class="inline">
+                    <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button id="delete-picture">
+                            <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                        </button>
+                        <p id="time-posted">{{ obj.uploaded_at }}</p>
+                    </form>                
+                    <p class="username">Posted By: {{ obj.uploaded_by }}</p>
+                </div>
+                <img src="{% static obj.image_url %}?t={% now 'u' %}" />
+                <p>{{ obj.caption }}</p>
+                <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit">
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    </button>
+                    {{obj.likes}}
+                </form>
+                {% if obj.comment_set.all %}
+                <ul>
+                    {% for comment in obj.comment_set.all %}
+                    <li>
+                        {{ comment.comment }} - time: {{ comment.time }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'app:comment' obj.id %}" method="post">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <button type="submit">Comment</button>                        
+                </form>
+                <a id="filter-link" href="{% url 'app:filter' obj.id %}">Filter</a>
+            </div>
+            {% endfor %} 
+            {% else %}
+                <h1>
+                    NO PICTURES HAVE BEEN POSTED! <i class="fa fa-frown-o" aria-hidden="true"></i>
+                </h1>
+            {% endif %} 
+            {% endblock body %}
+        </div>
+    </div> 
+</div>
 {% endblock %}
