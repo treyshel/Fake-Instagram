@@ -6,7 +6,7 @@ from PIL import ImageFilter
 class ImageForm(forms.ModelForm):
     class Meta:
         model = GetImage
-        fields = ('uploaded_by', 'image', 'caption')
+        fields = ('uploaded_by', 'image', 'caption', 'topic')
 
 
 class Filters(forms.Form):
@@ -44,3 +44,5 @@ class CommentForm(forms.Form):
     def save(self):
         return self.document.comment_set.create(
             comment=self.cleaned_data['comment'])
+
+

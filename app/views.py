@@ -78,6 +78,6 @@ class Like(View):
 
 class MostPopular(View):
     def get(self, request):
-        objects = GetImage.objects.all().order_by('-likes')
+        objects = GetImage.objects.all().order_by('-likes')[:5]
         return render(request, 'app/most-likes.html',
                       {'objects': objects})
