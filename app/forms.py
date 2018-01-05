@@ -44,5 +44,3 @@ class CommentForm(forms.Form):
     def save(self):
         return self.document.comment_set.create(
             comment=self.cleaned_data['comment'])
-
-

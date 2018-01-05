@@ -1,26 +1,24 @@
-{% extends 'app/base.html' %}
-{% load static %} 
-{% block content %}
-    <div class="col-lg-4 col-md-6 col-sm-8 col-lg-offset-0 col-sm-offset-2 margins">
-        <div class="row">
-            {% for obj in objects %}
-            <div class="thumbnail">
-                <div class="inline">
-                    {% csrf_token %}
-                    <p id="time-posted">{{ obj.uploaded_at }}</p>   
-                    <p class="username">Posted By: {{ obj.uploaded_by }}</p>
-                </div>
-                <img src="{% static obj.image_url %}?t={% now 'u' %}" />
-                <p>{{ obj.caption }}</p>
-                <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{obj.likes}}
-                </form>
+{% extends 'app/base.html' %} {% load static %} {% block content %}
+<div class="col-lg-4 col-md-6 col-sm-8 col-lg-offset-0 col-sm-offset-2 margins">
+    <div class="row">
+        {% for obj in objects %}
+        <div class="thumbnail">
+            <div class="inline">
+                {% csrf_token %}
+                <p id="time-posted">{{ obj.uploaded_at }}</p>
+                <p class="username">Posted By: {{ obj.uploaded_by }}</p>
             </div>
-            {% endfor %}
-        </div> 
-        <p>
-            <a href="{% url 'app:feed' %}">Return to home</a>
-        </p>
+            <h1>{{ obj.topic }}</h1>
+            <img src="{% static obj.image_url %}?t={% now 'u' %}" />
+            <p>{{ obj.caption }}</p>
+            <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {{obj.likes}}
+            </form>
+        </div>
+        {% endfor %}
     </div>
+    <p>
+        <a href="{% url 'app:feed' %}">Return to home</a>
+    </p>
+</div>
 {% endblock %}
