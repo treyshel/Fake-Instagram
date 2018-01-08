@@ -4,6 +4,7 @@
         <div class=" col-lg-10 col-sm-6 col-lg-offset-1 col-lg-offset-3 navbar-default navbar-fixed-top">
             <h1>FinstaGram</h1>
             <hr>
+            <a href="{% url 'app:topics' 4 %}">Nature</a>
             <a href="{% url 'app:upload' %}" title="all users">
                 <i class="fa fa-user fa-4x" aria-hidden="true"></i>
             </a>
@@ -13,11 +14,14 @@
             <a href="{% url 'app:mostpopular' %}" title="likes">
                 <i class="fa fa-heart fa-4x" aria-hidden="true"></i>
             </a>
+            <a href="{% url 'app:buzzingcomments' %}" title="likes">
+                <i class="fa fa-comment fa-4x" aria-hidden="true"></i>
+            </a>
         </div>
     </div>
     <div class="col-lg-offset-1 col-sm-offset-2 margins">
         <div class="row">
-            {% block body %} {% if objects %} {% for obj in objects %}
+            {% if objects %} {% for obj in objects %}
             <div class="col-lg-4 col-sm-8 thumbnail">
                 <div class="inline">
                     <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
@@ -36,7 +40,7 @@
                     <button type="submit">
                         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                     </button>
-                    {{obj.likes}}
+                    {{ obj.likes }}
                 </form>
                 {% if obj.comment_set.all %}
                 <ul>
@@ -58,7 +62,7 @@
                 NO PICTURES HAVE BEEN POSTED!
                 <i class="fa fa-frown-o" aria-hidden="true"></i>
             </h1>
-            {% endif %} {% endblock body %}
+            {% endif %}
         </div>
     </div>
 </div>

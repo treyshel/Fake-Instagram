@@ -4,6 +4,7 @@ from app.models import GetImage
 from django.views import View
 from PIL import ImageFilter, Image
 from resizeimage import resizeimage
+from django.contrib.auth import login, authenticate
 
 
 class PhotoView(View):
@@ -19,8 +20,9 @@ class PhotoView(View):
             image = Image.open(path)
             w, h = image.size
             s = min(w, h)
-            image = image.crop(box=(int((w - s) / 2), int((h - s) / 2), int(
-                (w + s) / 2), int((h + s) / 2)))
+            image = image.crop(
+                box=(int((w - s) / 2), int((h - s) / 2), int((w + s) / 2),
+                     int((h + s) / 2)))
             image = resizeimage.resize_cover(image, [500, 500], validate=False)
             image.save(path)
             return redirect('app:feed')
@@ -31,9 +33,10 @@ class PhotoView(View):
 class ShowFeed(View):
     def get(self, request):
         objects = GetImage.objects.all().order_by('-uploaded_at')
-        return render(request, 'app/feed.html',
-                      {'objects': objects,
-                       'comment_form': CommentForm()})
+        return render(request, 'app/feed.html', {
+            'objects': objects,
+            'comment_form': CommentForm()
+        })
 
 
 class AddFilter(View):
@@ -76,8 +79,46 @@ class Like(View):
         add_like.save()
         return redirect('app:feed')
 
+
 class MostPopular(View):
     def get(self, request):
         objects = GetImage.objects.all().order_by('-likes')[:5]
-        return render(request, 'app/most-likes.html',
-                      {'objects': objects})
+        return render(request, 'app/most-likes.html', {'objects': objects})
+
+
+class GetTopic(View):
+    def get(self, request, topic_id):
+        objects = GetImage.objects.filter(topic_id=topic_id)
+        return render(request, 'app/feed.html', {'objects': objects})
+
+
+class BuzzingComments(View):
+    def get(self, request):
+        objects = sorted(
+            GetImage.objects.all(),
+            key=lambda obj: obj.comment_set.count())[::-1]
+        return render(request, 'app/buzzing-comments.html', {
+            'objects': objects
+        })
+
+
+class SignUp(View):
+    def get(self, request):
+        form = SignUpForm()
+        return render(request, 'app/sign-up.html', {'form': form})
+
+    def post(self, request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db(
+            )  # load the profile instance created by the signal
+            user.profile.birth_date = form.cleaned_data.get('birth_date')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('app:feed')
+        else:
+            form = SignUpForm()
+            return render(request, 'app/sign-up.html', {'form': form})
