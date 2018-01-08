@@ -8,7 +8,15 @@ from django.contrib.auth.models import User
 class ImageForm(forms.ModelForm):
     class Meta:
         model = GetImage
-        fields = ('uploaded_by', 'image', 'caption', 'topic')
+        fields = ('image', 'caption', 'topic')
+
+    def __init__(self, uploaded_by=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.uploaded_by = uploaded_by
+
+    def save(self):
+        self.instance.uploaded_by = self.uploaded_by
+        self.instance.save()
 
 
 class Filters(forms.Form):
@@ -59,3 +67,8 @@ class SignUpForm(UserCreationForm):
             'password1',
             'password2',
         )
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=20)
+    password = forms.CharField(widget=forms.PasswordInput())

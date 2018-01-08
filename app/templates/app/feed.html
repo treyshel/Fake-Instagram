@@ -4,7 +4,11 @@
         <div class=" col-lg-10 col-sm-6 col-lg-offset-1 col-lg-offset-3 navbar-default navbar-fixed-top">
             <h1>FinstaGram</h1>
             <hr>
-            <a href="{% url 'app:topics' 4 %}">Nature</a>
+            <a href="{% url 'app:topics' 1 %}">Sports</a>
+            <a href="{% url 'app:topics' 2 %}">Code</a>
+            <a href="{% url 'app:topics' 3 %}">Nature</a>
+            <a href="{% url 'app:topics' 4 %}">Animals</a>
+            <a href="{% url 'app:topics' 5 %}">Other</a>
             <a href="{% url 'app:upload' %}" title="all users">
                 <i class="fa fa-user fa-4x" aria-hidden="true"></i>
             </a>
@@ -31,7 +35,7 @@
                         </button>
                         <p id="time-posted">{{ obj.uploaded_at }}</p>
                     </form>
-                    <p class="username">Posted By: {{ obj.uploaded_by }} in {{ obj.topic }}</p>
+                    <p class="username">Posted By: {{ obj.uploaded_by.user.username }}</p>
                 </div>
                 <img src="{% static obj.image_url %}?t={% now 'u' %}" />
                 <p>{{ obj.caption }}</p>

@@ -8,12 +8,9 @@ from django.contrib.auth import login, authenticate
 
 
 class PhotoView(View):
-    def get(self, request):
-        form = ImageForm()
-        return render(request, 'app/post.html', {'form': form})
-
     def post(self, request):
-        form = ImageForm(request.POST, request.FILES)
+        user = request.user
+        form = ImageForm(user.profile, request.POST, request.FILES)
         if form.is_valid():
             form.save()
             path = 'app/static/' + GetImage.objects.last().image_url()
@@ -28,6 +25,10 @@ class PhotoView(View):
             return redirect('app:feed')
         else:
             return render(request, 'app/post.html', {'form': form})
+
+    def get(self, request):
+        form = ImageForm()
+        return render(request, 'app/post.html', {'form': form})
 
 
 class ShowFeed(View):
@@ -122,3 +123,21 @@ class SignUp(View):
         else:
             form = SignUpForm()
             return render(request, 'app/sign-up.html', {'form': form})
+
+
+class Login(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, 'app/login.html', {'form': form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data.get('password')
+            username = form.cleaned_data.get('username')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('app:feed')
+        else:
+            form = LoginForm()
+            return render(request, 'app/login.html', {'form': form})

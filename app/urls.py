@@ -19,8 +19,5 @@ urlpatterns = [
         name='buzzingcomments'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     path('logout/', auth_views.logout, name='logout'),
-    path(
-        'login/',
-        auth_views.login, {'template_name': 'app/login.html'},
-        name='login'),
+    path('login/', views.Login.as_view(), name='login'),
 ]

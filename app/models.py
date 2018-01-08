@@ -11,8 +11,22 @@ class Topic(models.Model):
         return self.name
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+
+
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+
 class GetImage(models.Model):
-    uploaded_by = models.CharField(max_length=20, blank=True)
+    uploaded_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='app/static/app/images/')
     caption = models.CharField(max_length=255, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -28,17 +42,3 @@ class Comment(models.Model):
     comment = models.CharField(max_length=120)
     time = models.DateTimeField(auto_now_add=True)
     document = models.ForeignKey(GetImage, on_delete=models.CASCADE)
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
-
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
