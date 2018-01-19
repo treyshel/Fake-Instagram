@@ -5,7 +5,7 @@ from . import views
 
 app_name = 'app'
 urlpatterns = [
-    path('', views.ShowFeed.as_view(), name='feed'),
+    path('feed', views.ShowFeed.as_view(), name='feed'),
     path('upload/', views.PhotoView.as_view(), name='upload'),
     path('filter/<image_id>/', views.AddFilter.as_view(), name='filter'),
     path('delete/<image_id>', views.DeletePost.as_view(), name='delete'),
@@ -19,5 +19,5 @@ urlpatterns = [
         name='buzzingcomments'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     path('logout/', auth_views.logout, name='logout'),
-    path('login/', views.Login.as_view(), name='login'),
+    path('', views.Login.as_view(), name='login'),
 ]

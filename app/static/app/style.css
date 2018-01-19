@@ -1,95 +1,74 @@
-body {
-    background-color: slategray;
-}
-
-.navbar-default {
-    background: lightblue; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(
-        left,
-        lightgreen
-    ); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(
-        right,
-        lightgreen
-    ); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(
-        right,
-        lightgreen
-    ); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(
-        to right,
-        lightblue,
-        lightgreen
-    ); /* Standard syntax */
-    border-radius: 25px;
+.navbar {
+  background: lightblue; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    lightgreen
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    lightgreen
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    lightgreen
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    lightblue,
+    lightgreen
+  ); /* Standard syntax */
 }
 
 hr {
-    background-color: dimgrey;
-    color: dimgrey;
-    border-color: dimgrey;
-    height: 8px;
-    border-radius: 50px;
+  background-color: dimgrey;
+  color: dimgrey;
+  border-color: dimgrey;
+  height: 8px;
+  border-radius: 50px;
 }
 
 .inline {
-    display: inline;
+  display: inline;
 }
 
 .header {
-    font-family: 'Lobster', cursive;
-    position: absolute;
-    text-align: center;
+  font-family: "Lobster", cursive;
+  position: absolute;
+  text-align: center;
 }
 
 #time-posted {
-    color: lightgrey;
+  color: lightgrey;
 }
 
 .username {
-    font-size: 2em;
-    font-weight: bold;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .fa-4x {
-    color: white;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding-bottom: 8px;
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-bottom: 8px;
 }
 
 #delete-picture {
-    float: right;
-    background-color: lightblue;
-    border-color: lightblue;
-    border-radius: 5px;
-}
-
-.margins {
-    margin-top: 15em;
-    margin-bottom: 1em;
-    /* text-align: center; */
+  float: right;
+  background-color: lightblue;
+  border-color: lightblue;
+  border-radius: 5px;
 }
 
 h4 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .thumbnail {
-    border: 4px solid lightblue;
-    width: 30em;
-    margin-left: 38px;
-    margin-right: 10px;
+  border: 4px solid lightblue;
+  width: 30em;
 }
 
-#filter-link {
-    color: lightblue;
-}
-
-#filter-link {
-    color: lightgreen;
-}
-
-.fa-thumbs-up {
-    color: red;
+body {
+  background-color: slategray;
 }

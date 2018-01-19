@@ -1,14 +1,12 @@
 {% extends 'app/base.html' %} {% load static %} {% block content %}
-<div class="col-lg-offset-5">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- put the form in a <p> tag -->
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
-    <p>
-        <a href="{% url 'app:feed' %}">Return to home</a>
-    </p>
-</div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- put the form in a <p> tag -->
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+<p>
+    <a href="{% url 'app:feed' %}">Return to home</a>
+</p>
 
 {% endblock %}
