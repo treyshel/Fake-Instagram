@@ -1,49 +1,105 @@
 {% extends 'app/base.html' %} {% load static %} {% block content %}
-<!-- <a href="{% url 'app:mostpopular' %}" title="likes">
-        <i class="fa fa-heart fa-4x" aria-hidden="true"></i>
-    </a>
-    <a href="{% url 'app:buzzingcomments' %}" title="likes">
-        <i class="fa fa-comment fa-4x" aria-hidden="true"></i>
-    </a> -->
-{% if objects %} {% for obj in objects %}
-<div class="thumbnail">
-    <div class="inline">
-        <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
+<div class="container">
+    <h1 id="header-title">FINSTAGRAM</h1>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'app:upload' %}" title="upload a photo">
+                    <i class="fa fa-camera-retro fa-2x"></i>
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Topics
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{% url 'app:topics' 1 %}">Sports</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app:topics' 2 %}">Code</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app:topics' 3 %}">Nature</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app:topics' 4 %}">Animals</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app:topics' 5 %}">Other</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Most Popular
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{% url 'app:mostpopular' %}">by Comments</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'app:buzzingcomments' %}">by Likes</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'app:signup' %}">
+                        <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                </li>
+                <li>
+                    <a href="{% url 'app:login' %}">
+                        <span class="glyphicon glyphicon-log-in"></span> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% if objects %} {% for obj in objects %}
+    <div class="thumbnail">
+        <div class="inline">
+            <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button id="delete-picture">
+                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                </button>
+                <p id="time-posted">{{ obj.uploaded_at }}</p>
+            </form>
+            <p class="username">Posted By: {{ obj.uploaded_by.user.username }}</p>
+        </div>
+        <img src="{% static obj.image_url %}?t={% now 'u' %}" />
+        <p>{{ obj.caption }}</p>
+        <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <button id="delete-picture">
-                <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+            <button type="submit">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
             </button>
-            <p id="time-posted">{{ obj.uploaded_at }}</p>
+            {{ obj.likes }}
         </form>
-        <p class="username">Posted By: {{ obj.uploaded_by.user.username }}</p>
+        {% if obj.comment_set.all %}
+        <ul>
+            {% for comment in obj.comment_set.all %}
+            <li>
+                {{ comment.comment }} - time: {{ comment.time }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="{% url 'app:comment' obj.id %}" method="post">
+            {% csrf_token %} {{ comment_form }}
+            <button type="submit">Comment</button>
+        </form>
+        <a id="filter-link" href="{% url 'app:filter' obj.id %}">Filter</a>
     </div>
-    <img src="{% static obj.image_url %}?t={% now 'u' %}" />
-    <p>{{ obj.caption }}</p>
-    <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <button type="submit">
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-        </button>
-        {{ obj.likes }}
-    </form>
-    {% if obj.comment_set.all %}
-    <ul>
-        {% for comment in obj.comment_set.all %}
-        <li>
-            {{ comment.comment }} - time: {{ comment.time }}
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <form action="{% url 'app:comment' obj.id %}" method="post">
-        {% csrf_token %} {{ comment_form }}
-        <button type="submit">Comment</button>
-    </form>
-    <a id="filter-link" href="{% url 'app:filter' obj.id %}">Filter</a>
+    {% endfor %} {% else %}
+    <h1>
+        NO PICTURES HAVE BEEN POSTED!
+        <i class="fa fa-frown-o" aria-hidden="true"></i>
+    </h1>
 </div>
-{% endfor %} {% else %}
-<h1>
-    NO PICTURES HAVE BEEN POSTED!
-    <i class="fa fa-frown-o" aria-hidden="true"></i>
-</h1>
 {% endif %} {% endblock %}

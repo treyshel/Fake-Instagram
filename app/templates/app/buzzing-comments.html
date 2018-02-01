@@ -6,13 +6,13 @@
             <div class="inline">
                 {% csrf_token %}
                 <p id="time-posted">{{ obj.uploaded_at }}</p>
-                <p class="username">Posted By: {{ obj.uploaded_by }}</p>
+                <p class="username">Posted By: {{ obj.uploaded_by.user }}</p>
             </div>
             <h1>{{ obj.topic }}</h1>
             <img src="{% static obj.image_url %}?t={% now 'u' %}" />
             <p>{{ obj.caption }}</p>
             <form action="{% url 'app:likes' obj.id %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %} {{obj.comment}}
+                {% csrf_token %} {{ obj.comment }}
             </form>
         </div>
         {% endfor %}

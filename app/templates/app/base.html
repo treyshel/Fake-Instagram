@@ -25,66 +25,6 @@
 
 <body>
     <div class="container">
-        <h1 id="header-title">FINSTAGRAM</h1>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'app:upload' %}" title="upload a photo">
-                        <i class="fa fa-camera-retro fa-2x"></i>
-                    </a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">Home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Topics
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{% url 'app:topics' 1 %}">Sports</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'app:topics' 2 %}">Code</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'app:topics' 3 %}">Nature</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'app:topics' 4 %}">Animals</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'app:topics' 5 %}">Other</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Most Popular
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{% url 'app:mostpopular' %}">by Comments</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'app:buzzingcomments' %}">by Likes</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="{% url 'app:signup' %}">
-                            <span class="glyphicon glyphicon-user"></span> Sign Up</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'app:login' %}">
-                            <span class="glyphicon glyphicon-log-in"></span> Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
         {% block content %} {% endblock %}
     </div>
     <script src="{% static 'app/index.js' %}"></script>

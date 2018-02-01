@@ -17,7 +17,7 @@ urlpatterns = [
         'buzzingcomments/',
         views.BuzzingComments.as_view(),
         name='buzzingcomments'),
-    path('signup/', views.SignUp.as_view(), name='signup'),
+    path('', views.SignUp.as_view(), name='signup'),
     path('logout/', auth_views.logout, name='logout'),
-    path('', views.Login.as_view(), name='login'),
+    path('login/', views.Login.as_view(), name='login'),
 ]

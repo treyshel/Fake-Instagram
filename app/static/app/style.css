@@ -69,6 +69,6 @@ h4 {
   width: 30em;
 }
 
-body {
-  background-color: slategray;
+.likes-styling {
+  font-weight: bolder;
 }
